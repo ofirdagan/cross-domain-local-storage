@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>dummy client</title>
+  <script src="../scripts/cross-domain-local-storage.js"></script>
+  <script type="text/javascript">
+    function setValue () {
+      CDLS.set('bla', 'some value');
+    }
+    function getValue () {
+      CDLS.get('bla', function (data) {
+        alert('got value: "' + data.value + '" for key: "' +data.key + '"');
+      });
+    }
+  </script>
+</head>
+<body>
+<button onclick="setValue()">Set Value</button>
+<button onclick="getValue()">Get Value</button>
+</body>
+</html>

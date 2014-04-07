@@ -11,9 +11,9 @@
       iframeId: 'cross-domain-iframe'
     };
     var api = window.CDLS;
-    var requestId = 0;
+    var requestId = -1;
     var iframe;
-    var requests = [];
+    var requests = {};
     api.init = function () {
       var temp = document.createElement('div');
       window.addEventListener("message", receiveMessage, false);
@@ -27,6 +27,7 @@
         var data = event.data;
         if(data.action === 'get-answer') {
           requests[data.id](data);
+          delete requests[data.id];
         }
       }
     }
@@ -42,8 +43,8 @@
     };
 
     api.get = function (key, callback) {
-      requests[requestId] = callback;
       requestId++;
+      requests[requestId] = callback;
       var data = {
         namespace: 'cross-domain-local-message',
         id: requestId,
