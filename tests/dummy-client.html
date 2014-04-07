@@ -3,20 +3,40 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title>dummy client</title>
+  <style type="text/css">
+    .label {
+      min-width: 110px;
+      display: inline-block;
+    }
+  </style>
   <script src="../scripts/cross-domain-local-storage.js"></script>
   <script type="text/javascript">
     function setValue () {
-      CDLS.set('bla', 'some value');
+      var key = document.getElementById("keyInput").value;
+      if(key) {
+        var value = document.getElementById("keyInput").value;
+        CDLS.set(key.value, value);
+      } else {
+        alert('You must enter a key.');
+      }
     }
     function getValue () {
-      CDLS.get('bla', function (data) {
-        alert('got value: "' + data.value + '" for key: "' +data.key + '"');
-      });
+      var key = document.getElementById("getInput").value;
+      if(key) {
+        CDLS.get(key, function (data) {
+          alert('got value: "' + data.value + '" for key: "' + data.key + '"');
+        });
+      } else {
+        alert('You must enter a key to get.');
+      }
     }
   </script>
 </head>
 <body>
+<div><div class="label">Enter key name: </div><input id="keyInput" type="text" /></div>
+<div><div class="label">Enter value: </div><input id="valueInput" type="text" /></div>
 <button onclick="setValue()">Set Value</button>
+<div><div class="label">Enter key to get: </div><input id="getInput" type="text" /></div>
 <button onclick="getValue()">Get Value</button>
 </body>
 </html>
