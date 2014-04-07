@@ -38,11 +38,12 @@
       }
     }
 
-    function buildMessage(action, key, value) {
+    function buildMessage(action, key, value, callback) {
       requestId++;
       requests[requestId] = callback;
       var data = {
         namespace: NAMESPACE,
+        id: requestId,
         action: action,
         key: key,
         value: value
@@ -50,12 +51,12 @@
       iframe.contentWindow.postMessage(data, '*');
     }
 
-    api.set = function (key, value) {
-      buildMessage('set', key, value);
+    api.set = function (key, value, callback) {
+      buildMessage('set', key, value, callback);
     };
 
     api.get = function (key, callback) {
-      buildMessage('get', key);
+      buildMessage('get', null, callback);
     };
 
 
