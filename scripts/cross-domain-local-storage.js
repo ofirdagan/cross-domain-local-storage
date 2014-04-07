@@ -56,7 +56,7 @@
     };
 
     api.get = function (key, callback) {
-      buildMessage('get', null, callback);
+      buildMessage('get', key,  null, callback);
     };
 
 
