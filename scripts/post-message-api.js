@@ -3,7 +3,8 @@
  */
 'use strict';
 
-window.addEventListener("message", message, false);
+window.addEventListener("message", receiveMessage, false);
+
 function receiveMessage(event) {
 
   if (!event.origin.match(/[http|https]:\/\/.*wix.*.com/)) {
