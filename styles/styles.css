@@ -1,0 +1,21 @@
+body {
+    font-family: Lato, Calibri, Arial, sans-serif;
+    font-weight: 300;
+}
+.content {
+    padding: 20px 20px;
+    width: 430px;
+    height: 160px;
+    border-radius: 4px;
+    background-color: #DFDFDF;
+    margin: auto;
+}
+.label {
+    min-width: 110px;
+    display: inline-block;
+}
+.header {
+    color: rgb(71, 163, 218);
+    text-decoration: underline;
+    text-align: center;
+}
