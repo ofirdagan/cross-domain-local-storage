@@ -3,10 +3,28 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title>dummy client</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <style type="text/css">
+    body {
+      font-family: Lato, Calibri, Arial, sans-serif;
+      font-weight: 300;
+    }
+    .content {
+      padding: 20px 20px;
+      width: 430px;
+      height: 160px;
+      border-radius: 4px;
+      background-color: #DFDFDF;
+      margin: auto;
+    }
     .label {
       min-width: 110px;
       display: inline-block;
+    }
+    .header {
+      color: rgb(71, 163, 218);
+      text-decoration: underline;
+      text-align: center;
     }
   </style>
   <script src="../scripts/cross-domain-local-storage.js"></script>
@@ -39,10 +57,13 @@
   </script>
 </head>
 <body>
-<div><div class="label">Enter key name: </div><input id="keyInput" type="text" /></div>
-<div><div class="label">Enter value: </div><input id="valueInput" type="text" /></div>
-<button onclick="setValue()">Set Value</button>
-<div><div class="label">Enter key to get: </div><input id="getInput" type="text" /></div>
-<button onclick="getValue()">Get Value</button>
+<h1 class="header">Cross Domain Local Storage</h1>
+<div class="content">
+  <div><div class="label">Enter key name: </div><input id="keyInput" type="text" /></div>
+  <div><div class="label">Enter value: </div><input id="valueInput" type="text" /></div>
+  <button onclick="setValue()">Set Value</button>
+  <div><div class="label">Enter key to get: </div><input id="getInput" type="text" /></div>
+  <button onclick="getValue()">Get Value</button>
+</div>
 </body>
 </html>
