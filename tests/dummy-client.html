@@ -15,7 +15,13 @@
       var key = document.getElementById("keyInput").value;
       if(key) {
         var value = document.getElementById("valueInput").value;
-        CDLS.set(key, value);
+        CDLS.set(key, value, function (data) {
+          if(data.success) {
+            alert('Your data has been successfully stored.');
+          } else {
+            alert('Ops, could not store your data.');
+          }
+        });
       } else {
         alert('You must enter a key.');
       }

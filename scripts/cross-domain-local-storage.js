@@ -22,36 +22,40 @@
       iframe = document.getElementById(options.iframeId);
     };
 
+    function applyCallback(data) {
+      requests[data.id](data);
+      delete requests[data.id];
+    }
+
     function receiveMessage (event) {
       if(event.data && event.data.namespace === NAMESPACE){
         var data = event.data;
         if(data.action === 'get-answer') {
-          requests[data.id](data);
-          delete requests[data.id];
+          applyCallback(data);
+        } else if (data.action === 'set-answer'){
+          applyCallback(data);
         }
       }
     }
 
-    api.set = function (key, value) {
+    function buildMessage(action, key, value) {
+      requestId++;
+      requests[requestId] = callback;
       var data = {
         namespace: NAMESPACE,
-        action: 'set',
+        action: action,
         key: key,
         value: value
       };
       iframe.contentWindow.postMessage(data, '*');
+    }
+
+    api.set = function (key, value) {
+      buildMessage('set', key, value);
     };
 
     api.get = function (key, callback) {
-      requestId++;
-      requests[requestId] = callback;
-      var data = {
-        namespace: 'cross-domain-local-message',
-        id: requestId,
-        action: 'get',
-        key: key
-      };
-      iframe.contentWindow.postMessage(data, '*');
+      buildMessage('get', key);
     };
 
 
