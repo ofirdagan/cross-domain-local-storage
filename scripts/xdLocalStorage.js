@@ -50,6 +50,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   function init (options) {
     if(wasInit) {
       console.log('xdLocalStorage was already initialized!');
+      return;
     }
     wasInit = true;
     options = extend(options, defaultOptions);
@@ -61,7 +62,6 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   }
   return {
     init: function (options) {
-      wasInit = true;
       if (document.readyState === "complete") {
         init(options);
       } else {
