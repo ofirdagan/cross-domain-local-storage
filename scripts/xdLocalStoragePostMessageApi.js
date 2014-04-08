@@ -5,12 +5,11 @@
 (function () {
   window.addEventListener("message", receiveMessage, false);
 
-  var NAMESPACE = 'cross-domain-local-message';
+  var MESSAGE_NAMESPACE = 'cross-domain-local-message';
   function getData(id, key) {
     var value = localStorage.getItem(key);
     var data = {
-      namespace: NAMESPACE,
-      action: 'get-answer',
+      namespace: MESSAGE_NAMESPACE,
       id: id,
       key: key,
       value: value
@@ -22,8 +21,7 @@
     localStorage.setItem(data.key, data.value);
     var checkGet = localStorage.getItem(data.key);
     var data = {
-      namespace: NAMESPACE,
-      action: 'set-answer',
+      namespace: MESSAGE_NAMESPACE,
       id: data.id,
       success: checkGet === data.value
     }
@@ -32,7 +30,7 @@
 
   function receiveMessage(event) {
     var data = event.data;
-    if (data && data.namespace === NAMESPACE) {
+    if (data && data.namespace === MESSAGE_NAMESPACE) {
       if(data.action === 'set') {
         setData(data);
       } else if (data.action === 'get') {

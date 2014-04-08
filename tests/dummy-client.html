@@ -5,13 +5,14 @@
   <title>dummy client</title>
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="../styles/styles.css">
-  <script src="../scripts/cross-domain-local-storage.js"></script>
+  <script src="../scripts/xdLocalStorage.js"></script>
   <script type="text/javascript">
+    xdLocalStorage.init();
     function setValue () {
       var key = document.getElementById("keyInput").value;
       if(key) {
         var value = document.getElementById("valueInput").value;
-        CDLS.set(key, value, function (data) {
+          xdLocalStorage.setItem(key, value, function (data) {
           if(data.success) {
             alert('Your data has been successfully stored.');
           } else {
@@ -25,7 +26,7 @@
     function getValue () {
       var key = document.getElementById("getInput").value;
       if(key) {
-        CDLS.get(key, function (data) {
+          xdLocalStorage.getItem(key, function (data) {
           alert('got value: "' + data.value + '" for key: "' + data.key + '"');
         });
       } else {
