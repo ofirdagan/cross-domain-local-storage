@@ -5,15 +5,26 @@
 /* global xdLocalStorage */
 
 angular.module('xdLocalStorage', [])
-  .service('xdLocalStorage', function () {
-
+  .provider('xdLocalStorage', function () {
+    var wasInit = false;
     this.init = function(options) {
       xdLocalStorage.init(options);
+      wasInit = true;
     }
-    this.setItem = function(key, value, callback) {
-      xdLocalStorage.setItem(key, value, callback);
-    }
-    this.getItem = function(key, callback) {
-      xdLocalStorage.getItem(key, callback);
+    this.$get = function () {
+      return {
+        setItem: function(key, value, callback) {
+          if(!wasInit) {
+            throw 'You must init xdLocalStorage in app config before use';
+          }
+          xdLocalStorage.setItem(key, value, callback);
+        },
+        getItem: function(key, callback) {
+          if(!wasInit) {
+            throw 'You must init xdLocalStorage in app config before use';
+          }
+          xdLocalStorage.getItem(key, callback);
+        }
+      }
     }
   });
