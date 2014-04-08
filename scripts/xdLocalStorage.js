@@ -42,7 +42,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     var key;
     for (key in object) {
       if (object.hasOwnProperty(key)) {
-        result.key = object[key];
+        result[key] = object[key];
       }
     }
     return result;
