@@ -3,7 +3,7 @@
  */
 'use strict';
 window.xdLocalStorage = window.xdLocalStorage || (function () {
-  var NAMESPACE = 'cross-domain-local-message';
+  var MESSAGE_NAMESPACE = 'cross-domain-local-message';
   var defaultOptions = {
     iframeId: 'cross-domain-iframe',
     iframeUrl: 'https://rawgithub.com/ofirdagan/cross-domain-local-storage/master/html/cross-domain-local-storage.html'
@@ -19,7 +19,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   }
 
   function receiveMessage (event) {
-    if(event.data && event.data.namespace === NAMESPACE){
+    if(event.data && event.data.namespace === MESSAGE_NAMESPACE){
       var data = event.data;
       applyCallback(data);
     }
@@ -29,7 +29,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     requestId++;
     requests[requestId] = callback;
     var data = {
-      namespace: NAMESPACE,
+      namespace: MESSAGE_NAMESPACE,
       id: requestId,
       action: action,
       key: key,
