@@ -47,7 +47,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     }
     return result;
   }
-  function init (options) {
+  function init (options, callback) {
     if(wasInit) {
       console.log('xdLocalStorage was already initialized!');
       return;
@@ -59,27 +59,33 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     temp.innerHTML = '<iframe id="' + options.iframeId + '" src=' + options.iframeUrl + ' style="display: none;"></iframe>';
     document.body.appendChild(temp);
     iframe = document.getElementById(options.iframeId);
+    if(callback) {
+      callback();
+    }
   }
   return {
-    init: function (options) {
+    //callback is optional for cases you use the api before window load.
+    init: function (options, callback) {
       if (document.readyState === "complete") {
-        init(options);
+        init(options, callback);
       } else {
         window.onload = function() {
-          init(options);
+          init(options, callback);
         }
       }
     },
     setItem: function (key, value, callback) {
       if(!wasInit){
-        console.log('You must call xdLocalStorage.init() before using it.')
+        console.log('You must call xdLocalStorage.init() before using it.');
+        return;
       }
       buildMessage('set', key, value, callback);
     },
 
     getItem: function (key, callback) {
       if(!wasInit){
-        console.log('You must call xdLocalStorage.init() before using it.')
+        console.log('You must call xdLocalStorage.init() before using it.');
+        return;
       }
       buildMessage('get', key,  null, callback);
     }
