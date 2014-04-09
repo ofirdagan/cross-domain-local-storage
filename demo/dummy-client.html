@@ -7,7 +7,14 @@
   <link rel="stylesheet" type="text/css" href="../styles/styles.css">
   <script src="../scripts/xdLocalStorage.js"></script>
   <script type="text/javascript">
-    xdLocalStorage.init();
+    xdLocalStorage.init(
+        {
+            iframeUrl:'../html/cross-domain-local-storage.html',
+            initCallback: function () {
+                console.log('got iframe ready');
+            }
+        }
+    );
     function setValue () {
       var key = document.getElementById("keyInput").value;
       if(key) {

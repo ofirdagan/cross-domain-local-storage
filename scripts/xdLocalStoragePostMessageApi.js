@@ -38,4 +38,13 @@
       }
     }
   }
+  function sendOnLoad() {
+    var data = {
+      namespace: MESSAGE_NAMESPACE,
+      id: 'iframe-ready'
+    }
+    parent.postMessage(data, '*');
+  }
+  //on creation
+  sendOnLoad();
 })();
