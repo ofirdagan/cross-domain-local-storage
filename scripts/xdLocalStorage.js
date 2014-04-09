@@ -7,7 +7,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   var options = {
     iframeId: 'cross-domain-iframe',
     iframeUrl: undefined,
-    initCallback: undefined
+    initCallback: function () {}
   };
   var requestId = -1;
   var iframe;
@@ -15,15 +15,17 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   var wasInit = false;
   var iframeReady = true;
 
-    function applyCallback(data) {
-    requests[data.id](data);
-    delete requests[data.id];
+  function applyCallback(data) {
+    if (requests[data.id]) {
+      requests[data.id](data);
+      delete requests[data.id];
+    }
   }
 
   function receiveMessage (event) {
     if(event.data && event.data.namespace === MESSAGE_NAMESPACE){
       var data = event.data;
-      if (data.id === 'iframe-ready' && options.initCallback) {
+      if (data.id === 'iframe-ready') {
         iframeReady = true;
         options.initCallback();
       } else {
