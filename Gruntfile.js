@@ -326,7 +326,12 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
-
+    release: {
+      options: {
+        file: 'bower.json',
+        npm: false
+      }
+    },
     // Generates a custom Modernizr build that includes only the tests you
     // reference in your app
     modernizr: {
