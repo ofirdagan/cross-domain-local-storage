@@ -1,0 +1,71 @@
+<!DOCTYPE html><html class=no-js><head><meta charset=utf-8><title>test</title><meta name=description content=""><meta name=viewport content="width=device-width"><link rel="shortcut icon" href=/favicon.ico><!-- Place favicon.ico and apple-touch-icon.png in the root directory --><link rel=stylesheet href=styles/styles.css><script src=scripts/xdLocalStorage.min.js></script><script src=scripts/xdLocalStoragePostMessageApi.min.js></script><script src=scripts/ng-xdLocalStorage.min.js></script><script type=text/javascript>xdLocalStorage.init(
+                {
+                    iframeUrl:'/views/cross-domain-local-storage.html',
+                    initCallback: function () {
+                        console.log('got iframe ready');
+                        xdLocalStorage.setItem('check', 'no callback');
+                    }
+                }
+        );
+        function setValue () {
+            document.getElementById('result').innerHTML ='';
+            var key = document.getElementById("keyInput").value;
+            if(key) {
+                var value = document.getElementById("valueInput").value;
+                xdLocalStorage.setItem(key, value, function (data) {
+                    if(data.success) {
+                        document.getElementById('result').innerHTML = 'Your data has been successfully stored.';
+                    } else {
+                        document.getElementById('result').innerHTML = 'Ops, could not store your data.';
+                    }
+                });
+            } else {
+                alert('You must enter a key.');
+            }
+        }
+        function getItem () {
+            document.getElementById('result').innerHTML ='';
+            var key = document.getElementById("getInput").value;
+            if(key) {
+                xdLocalStorage.getItem(key, function (data) {
+                    document.getElementById('result').innerHTML = 'got value: "' + data.value + '" for key: "' + data.key + '"';
+                });
+            } else {
+                alert('You must enter a key to get.');
+            }
+        }
+        function removeItem () {
+            document.getElementById('result').innerHTML ='';
+            var key = document.getElementById("removeInput").value;
+            if(key) {
+                xdLocalStorage.removeItem(key, function (data) {
+                    document.getElementById('result').innerHTML = 'Key was removed';
+                });
+            } else {
+                alert('You must enter a key to remove.');
+            }
+        }
+        function keyName () {
+            document.getElementById('result').innerHTML ='';
+            var index = document.getElementById("keyNameInput").value;
+            if(index) {
+                xdLocalStorage.key(index, function (data) {
+                    document.getElementById('result').innerHTML = 'Key name for index ' + index + ' is: '+data.key;
+                });
+            } else {
+                alert('You must enter a key index.');
+            }
+        }
+        function clearAll () {
+            document.getElementById('result').innerHTML ='';
+            xdLocalStorage.clear(function (data) {
+                document.getElementById('result').innerHTML = 'LocalStorage was cleared.';
+            });
+        }</script><body><!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]--><h1 class=header>Cross Domain Local Storage</h1><div class=content><div><div class=label>Enter key name:</div><input id=keyInput></div><div><div class=label>Enter value:</div><input id=valueInput></div><button onclick=setValue()>Set Value</button><div><div class=label>Enter key to get:</div><input id=getInput></div><button onclick=getItem()>Get Key</button><div><div class=label>Enter key to remove:</div><input id=removeInput></div><button onclick=removeItem()>Remove Key</button><div><div class=label>Enter key index:</div><input id=keyNameInput></div><button onclick=keyName()>Key</button><div><button onclick=clearAll()>Clear all</button></div><div><div class=label>Result:</div><div id=result></div></div></div><!-- Google Analytics: change UA-XXXXX-X to be your site's ID. --><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X');ga('send','pageview');</script>
