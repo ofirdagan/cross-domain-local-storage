@@ -4,18 +4,21 @@ body {
 }
 .content {
     padding: 20px 20px;
-    width: 430px;
-    height: 160px;
+    width: 480px;
     border-radius: 4px;
     background-color: #DFDFDF;
     margin: auto;
 }
 .label {
-    min-width: 110px;
+    min-width: 150px;
     display: inline-block;
 }
 .header {
     color: rgb(71, 163, 218);
     text-decoration: underline;
     text-align: center;
+}
+#result {
+    margin: 20px 0;
+    display: inline-block;
 }

@@ -46,23 +46,13 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     };
     iframe.contentWindow.postMessage(data, '*');
   }
-  function extend (object, defaultObject) {
-    var result = defaultObject || {};
-    var key;
-    for (key in object) {
-      if (object.hasOwnProperty(key)) {
-        result[key] = object[key];
-      }
-    }
-    return result;
-  }
   function init (customOptions) {
     if(wasInit) {
       console.log('xdLocalStorage was already initialized!');
       return;
     }
     wasInit = true;
-    options = extend(customOptions, options);
+    options = XdUtils.extend(customOptions, options);
     var temp = document.createElement('div');
     window.addEventListener("message", receiveMessage, false);
     temp.innerHTML = '<iframe id="' + options.iframeId + '" src=' + options.iframeUrl + ' style="display: none;"></iframe>';
@@ -108,6 +98,24 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
         return;
       }
       buildMessage('get', key,  null, callback);
+    },
+    removeItem: function(key, callback) {
+      if(!isApiReady()){
+        return;
+      }
+      buildMessage('remove', key,  null, callback);
+    },
+    key: function (index, callback) {
+      if(!isApiReady()){
+        return;
+      }
+      buildMessage('key', index,  null, callback);
+    },
+    clear: function (callback) {
+      if(!isApiReady()){
+        return;
+      }
+      buildMessage('clear', null,  null, callback);
     }
   }
 })();
