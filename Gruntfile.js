@@ -144,7 +144,12 @@ module.exports = function (grunt) {
       }
     },
 
-    // Compiles Sass to CSS and generates necessary files if requested
+    release: {
+      options: {
+        file: 'bower.json',
+        npm: false
+      }
+    },
     sass: {
       options: {
         loadPath: [
@@ -324,12 +329,6 @@ module.exports = function (grunt) {
         cwd: '<%= config.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
-      }
-    },
-    release: {
-      options: {
-        file: 'bower.json',
-        npm: false
       }
     },
     // Generates a custom Modernizr build that includes only the tests you
