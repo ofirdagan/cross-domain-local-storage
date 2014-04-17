@@ -6,7 +6,6 @@
     "Ofir Dagan <ofirdagan@gmail.com>"
   ],
   "dependencies": {
-    /*"modernizr": "~2.6.2"*/
   },
   "main": "scripts/xdLocalStorage.js",
   "description": "A neat solution for cross domain local storage using invisible iframe and post messages",
