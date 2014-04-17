@@ -2,19 +2,19 @@
  * Created by dagan on 07/04/2014.
  */
 'use strict';
+/* global XdUtils */
 (function () {
 
-  window.addEventListener("message", receiveMessage, false);
-
   var MESSAGE_NAMESPACE = 'cross-domain-local-message';
+
   var defaultData = {
     namespace: MESSAGE_NAMESPACE
   };
 
   function postData(id, data) {
-    var data = XdUtils.extend(data, defaultData);
-    data.id = id;
-    parent.postMessage(data, '*');
+    var mergedData = XdUtils.extend(data, defaultData);
+    mergedData.id = id;
+    parent.postMessage(mergedData, '*');
   }
 
   function getData(id, key) {
@@ -22,7 +22,7 @@
     var data = {
       key: key,
       value: value
-    }
+    };
     postData(id, data);
   }
 
@@ -31,7 +31,7 @@
     var checkGet = localStorage.getItem(key);
     var data = {
       success: checkGet === value
-    }
+    };
     postData(id, data);
   }
 
@@ -53,7 +53,7 @@
   function receiveMessage(event) {
     var data = event.data;
     if (data && data.namespace === MESSAGE_NAMESPACE) {
-      if(data.action === 'set') {
+      if (data.action === 'set') {
         setData(data.id, data.key, data.value);
       } else if (data.action === 'get') {
         getData(data.id, data.key);
@@ -63,14 +63,16 @@
         getKey(data.id, data.key);
       } else if (data.action === 'clear') {
         clear(data.id);
-      } 
+      }
     }
   }
+  window.addEventListener('message', receiveMessage, false);
+
   function sendOnLoad() {
     var data = {
       namespace: MESSAGE_NAMESPACE,
       id: 'iframe-ready'
-    }
+    };
     parent.postMessage(data, '*');
   }
   //on creation

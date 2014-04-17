@@ -2,6 +2,7 @@
  * Created by dagan on 07/04/2014.
  */
 'use strict';
+/* global console, XdUtils */
 window.xdLocalStorage = window.xdLocalStorage || (function () {
   var MESSAGE_NAMESPACE = 'cross-domain-local-message';
   var options = {
@@ -22,8 +23,8 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     }
   }
 
-  function receiveMessage (event) {
-    if(event.data && event.data.namespace === MESSAGE_NAMESPACE){
+  function receiveMessage(event) {
+    if (event.data && event.data.namespace === MESSAGE_NAMESPACE) {
       var data = event.data;
       if (data.id === 'iframe-ready') {
         iframeReady = true;
@@ -46,26 +47,26 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     };
     iframe.contentWindow.postMessage(data, '*');
   }
-  function init (customOptions) {
-    if(wasInit) {
+  function init(customOptions) {
+    if (wasInit) {
       console.log('xdLocalStorage was already initialized!');
       return;
     }
     wasInit = true;
     options = XdUtils.extend(customOptions, options);
     var temp = document.createElement('div');
-    window.addEventListener("message", receiveMessage, false);
+    window.addEventListener('message', receiveMessage, false);
     temp.innerHTML = '<iframe id="' + options.iframeId + '" src=' + options.iframeUrl + ' style="display: none;"></iframe>';
     document.body.appendChild(temp);
     iframe = document.getElementById(options.iframeId);
   }
 
   function isApiReady() {
-    if(!wasInit){
+    if (!wasInit) {
       console.log('You must call xdLocalStorage.init() before using it.');
       return false;
     }
-    if(!iframeReady){
+    if (!iframeReady) {
       console.log('You must wait for iframe ready message before using the api.');
       return false;
     }
@@ -75,47 +76,47 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   return {
     //callback is optional for cases you use the api before window load.
     init: function (customOptions) {
-      if(!customOptions.iframeUrl) {
+      if (!customOptions.iframeUrl) {
         throw 'You must specify iframeUrl';
       }
-      if (document.readyState === "complete") {
+      if (document.readyState === 'complete') {
         init(customOptions);
       } else {
-        window.onload = function() {
+        window.onload = function () {
           init(customOptions);
-        }
+        };
       }
     },
     setItem: function (key, value, callback) {
-      if(!isApiReady()){
+      if (!isApiReady()) {
         return;
       }
       buildMessage('set', key, value, callback);
     },
 
     getItem: function (key, callback) {
-      if(!isApiReady()){
+      if (!isApiReady()) {
         return;
       }
       buildMessage('get', key,  null, callback);
     },
-    removeItem: function(key, callback) {
-      if(!isApiReady()){
+    removeItem: function (key, callback) {
+      if (!isApiReady()) {
         return;
       }
       buildMessage('remove', key,  null, callback);
     },
     key: function (index, callback) {
-      if(!isApiReady()){
+      if (!isApiReady()) {
         return;
       }
       buildMessage('key', index,  null, callback);
     },
     clear: function (callback) {
-      if(!isApiReady()){
+      if (!isApiReady()) {
         return;
       }
       buildMessage('clear', null,  null, callback);
     }
-  }
+  };
 })();

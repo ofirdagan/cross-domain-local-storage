@@ -34,8 +34,8 @@ module.exports = function (grunt) {
         tasks: ['bowerInstall']
       },
       js: {
-        files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        files: ['<%= config.app %>/scripts/{,*/}*.js', 'test/**/*.js'],
+        tasks: ['jshint', 'karma:unit'],
         options: {
           livereload: true
         }
@@ -78,7 +78,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               connect.static('.tmp'),
               connect().use('/bower_components', connect.static('./bower_components')),
@@ -91,7 +91,7 @@ module.exports = function (grunt) {
         options: {
           open: false,
           port: 9001,
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -351,7 +351,7 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       test: [
-        'copy:styles'
+        'copy:styles',
       ],
       dist: [
         'sass',

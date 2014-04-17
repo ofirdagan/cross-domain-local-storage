@@ -20,6 +20,10 @@
   "globals": {
     "angular": false,
     "require": false,
-    "module": false
+    "module": false,
+    "window": false,
+    "parent": false,
+    "localStorage": false,
+    "document": false
   }
 }
