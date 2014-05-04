@@ -21,6 +21,8 @@ Download latest release from [here](https://github.com/ofirdagan/cross-domain-lo
 ```sh
 bower install xdLocalStorage --save
 
+```
+
 ## Usage
 
 1. Create an empty html with the following content:
