@@ -1,15 +1,15 @@
 Cross Domain Local Storage
 ==========================
 
-[Problem](#problem)
-[Solution]()
-[Why not use cookies?][]
-[Installation][]
-[Usage][]
-[API][]
-[Angular Support][]
-[Demo][]
-[Tests][]
+1. [Problem](#problem)
+2. [Solution](#solution)
+3. [Why not use cookies?](#why-not-use-cookies)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [API](#api)
+8. [Angular Support](#angular-support)
+9. [Demo](#demo)
+10. [Tests](#tests)
 
 
 ## Problem
