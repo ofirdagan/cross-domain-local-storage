@@ -1,8 +1,8 @@
-Cross Domain Local Storage (xdLocalStorage.js)
-==============================================
+Cross Domain Local Storage
+==========================
 
-[Problem][]
-[Solution][]
+[Problem](#problem)
+[Solution]()
 [Why not use cookies?][]
 [Installation][]
 [Usage][]
