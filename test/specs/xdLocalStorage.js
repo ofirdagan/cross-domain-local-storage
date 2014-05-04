@@ -12,7 +12,7 @@ describe('xdLocalStorage test', function () {
     xdLocalStorage.clear();
   });
 
-  it('should init the service successfuly', function (done) {
+  it('should init the service successfully', function (done) {
     xdLocalStorage.init(
       {
         iframeUrl: 'https://rawgit.com/ofirdagan/cross-domain-local-storage/master/app/views/cross-domain-local-storage.html',
