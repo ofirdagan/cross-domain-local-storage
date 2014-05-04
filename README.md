@@ -1,5 +1,16 @@
-cross-domain-local-storage
-==========================
+Cross Domain Local Storage (xdLocalStorage.js)
+==============================================
+
+[Problem][]
+[Solution][]
+[Why not use cookies?][]
+[Installation][]
+[Usage][]
+[API][]
+[Angular Support][]
+[Demo][]
+[Tests][]
+
 
 ## Problem
 
@@ -24,7 +35,7 @@ bower install xdLocalStorage --save
 
 ## Usage
 
-1. Create an empty html with the following content:
+- Create an empty html with the following content:
 
 ```html
 <!DOCTYPE html>
@@ -38,14 +49,14 @@ bower install xdLocalStorage --save
 </html>
 ```
 
-2. On your client page (the page you will read/store your data from) add:
+- On your client page (the page you will read/store your data from) add:
 
 ```html
  <!-- if you use angular continue reading.. there's angular support -->
  <script src="scripts/xdLocalStorage.min.js"></script>
 ```
 
-3. Init xdLocalStorage
+- Init xdLocalStorage
 
 ```js
     xdLocalStorage.init(
@@ -81,9 +92,9 @@ bower install xdLocalStorage --save
 
 ## Angular Support
 
-1. import `ng-xdLocalStorage.min.js` instead of `xdLocalStorage.min.js`
+- import `ng-xdLocalStorage.min.js` instead of `xdLocalStorage.min.js`
 
-2. include xdLocalStorage module and config it.
+- include xdLocalStorage module and config it.
 
 ```js
 angular.module('yourModule', ['xdLocalStorage']).config(function (xdLocalStorageProvider) {
@@ -100,7 +111,7 @@ angular.module('yourModule', ['xdLocalStorage']).config(function (xdLocalStorage
 
 ```
 
-3. inject xdLocalStorage where ever you want and use the API
+- inject xdLocalStorage where ever you want and use the API
 
 ```js
 angular.module('yourModule').run(function(xdLocalStorage) {
