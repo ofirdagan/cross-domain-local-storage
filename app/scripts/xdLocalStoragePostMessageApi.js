@@ -14,7 +14,7 @@
   function postData(id, data) {
     var mergedData = XdUtils.extend(data, defaultData);
     mergedData.id = id;
-    parent.postMessage(mergedData, '*');
+    parent.postMessage(JSON.stringify(mergedData), '*');
   }
 
   function getData(id, key) {
@@ -51,7 +51,7 @@
   }
 
   function receiveMessage(event) {
-    var data = event.data;
+    var data = JSON.parse(event.data);
     if (data && data.namespace === MESSAGE_NAMESPACE) {
       if (data.action === 'set') {
         setData(data.id, data.key, data.value);

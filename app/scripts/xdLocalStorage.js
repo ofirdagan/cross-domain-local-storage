@@ -24,8 +24,8 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   }
 
   function receiveMessage(event) {
-    if (event.data && event.data.namespace === MESSAGE_NAMESPACE) {
-      var data = event.data;
+    var data = JSON.parse(event.data);
+    if (data && data.namespace === MESSAGE_NAMESPACE) {
       if (data.id === 'iframe-ready') {
         iframeReady = true;
         options.initCallback();
@@ -45,7 +45,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       key: key,
       value: value
     };
-    iframe.contentWindow.postMessage(data, '*');
+    iframe.contentWindow.postMessage(JSON.stringify(data), '*');
   }
   function init(customOptions) {
     if (wasInit) {

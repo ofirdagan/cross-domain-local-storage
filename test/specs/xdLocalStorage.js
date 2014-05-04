@@ -17,7 +17,7 @@ describe('xdLocalStorage test', function () {
       {
         iframeUrl: 'https://rawgit.com/ofirdagan/cross-domain-local-storage/master/app/views/cross-domain-local-storage.html',
         initCallback: function () {
-          console.log('got iframe ready');
+          console.log('Got iframe ready');
           done();
         }
       }
