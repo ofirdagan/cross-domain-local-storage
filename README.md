@@ -20,7 +20,6 @@ They're also have a size limit (4K for all cookies together)
 Download latest release from [here](https://github.com/ofirdagan/cross-domain-local-storage/releases) or use bower (recommended)
 ```sh
 bower install xdLocalStorage --save
-
 ```
 
 ## Usage
@@ -28,22 +27,20 @@ bower install xdLocalStorage --save
 1. Create an empty html with the following content:
 
 ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <script src="xdLocalStoragePostMessageApi.min.js"></script>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="xdLocalStoragePostMessageApi.min.js"></script>
+</head>
+<body>
     This is the magical iframe
-    </body>
-    </html>
-
+</body>
+</html>
 ```
 
 2. On your client page (the page you will read/store your data from) add:
 
 ```html
-
  <!-- if you use angular continue reading.. there's angular support -->
  <script src="scripts/xdLocalStorage.min.js"></script>
 ```
@@ -51,7 +48,6 @@ bower install xdLocalStorage --save
 3. Init xdLocalStorage
 
 ```js
-
     xdLocalStorage.init(
         {
             /* required */
@@ -67,7 +63,6 @@ bower install xdLocalStorage --save
 ## API
 
 ```js
-
     // Store
     xdLocalStorage.setItem(key, value, function (data) {//callback});
 
