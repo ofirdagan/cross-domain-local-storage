@@ -61,9 +61,9 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     options = XdUtils.extend(customOptions, options);
     var temp = document.createElement('div');
 
-    if(window.addEventListener){
+    if (window.addEventListener) {
       window.addEventListener('message', receiveMessage, false);
-    }else{
+    } else {
       window.attachEvent('onmessage', receiveMessage);
     }
 

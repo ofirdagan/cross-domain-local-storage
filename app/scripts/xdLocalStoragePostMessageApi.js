@@ -72,9 +72,9 @@
     }
   }
 
-  if(window.addEventListener){
+  if (window.addEventListener) {
     window.addEventListener('message', receiveMessage, false);
-  }else{
+  } else {
     window.attachEvent('onmessage', receiveMessage);
   }
 
