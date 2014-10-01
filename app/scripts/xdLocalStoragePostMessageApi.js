@@ -71,7 +71,12 @@
       }
     }
   }
-  window.addEventListener('message', receiveMessage, false);
+
+  if(window.addEventListener){
+    window.addEventListener('message', receiveMessage, false);
+  }else{
+    window.attachEvent('onmessage', receiveMessage);
+  }
 
   function sendOnLoad() {
     var data = {

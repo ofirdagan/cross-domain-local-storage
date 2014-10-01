@@ -60,7 +60,13 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     wasInit = true;
     options = XdUtils.extend(customOptions, options);
     var temp = document.createElement('div');
-    window.addEventListener('message', receiveMessage, false);
+
+    if(window.addEventListener){
+      window.addEventListener('message', receiveMessage, false);
+    }else{
+      window.attachEvent('onmessage', receiveMessage);
+    }
+
     temp.innerHTML = '<iframe id="' + options.iframeId + '" src=' + options.iframeUrl + ' style="display: none;"></iframe>';
     document.body.appendChild(temp);
     iframe = document.getElementById(options.iframeId);
