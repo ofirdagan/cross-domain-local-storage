@@ -14,7 +14,8 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
   var iframe;
   var requests = {};
   var wasInit = false;
-  var iframeReady = true;
+  var iframeReady = false;
+  var messageCache = [];
 
   function applyCallback(data) {
     if (requests[data.id]) {
@@ -34,6 +35,10 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       if (data.id === 'iframe-ready') {
         iframeReady = true;
         options.initCallback();
+        messageCache.forEach(function (data) {
+            iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+          });
+        messageCache.length = 0;
       } else {
         applyCallback(data);
       }
@@ -50,7 +55,11 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       key: key,
       value: value
     };
-    iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+    if (iframeReady) {
+      iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+    } else {
+      messageCache.push(data);
+    }
   }
   function init(customOptions) {
     if (wasInit) {
@@ -59,7 +68,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     }
     wasInit = true;
     options = XdUtils.extend(customOptions, options);
-    var temp = document.createElement('div');
+    var temp = document.createDocumentFragment();
 
     if (window.addEventListener) {
       window.addEventListener('message', receiveMessage, false);
@@ -67,18 +76,16 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       window.attachEvent('onmessage', receiveMessage);
     }
 
-    temp.innerHTML = '<iframe id="' + options.iframeId + '" src=' + options.iframeUrl + ' style="display: none;"></iframe>';
+    iframe = temp.ownerDocument.createElement('iframe');
+    iframe.id = options.iframeId;
+    iframe.src = options.iframeUrl;
+    temp.appendChild(iframe);
     document.body.appendChild(temp);
-    iframe = document.getElementById(options.iframeId);
   }
 
   function isApiReady() {
     if (!wasInit) {
       console.log('You must call xdLocalStorage.init() before using it.');
-      return false;
-    }
-    if (!iframeReady) {
-      console.log('You must wait for iframe ready message before using the api.');
       return false;
     }
     return true;
@@ -90,13 +97,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       if (!customOptions.iframeUrl) {
         throw 'You must specify iframeUrl';
       }
-      if (document.readyState === 'complete') {
-        init(customOptions);
-      } else {
-        window.onload = function () {
-          init(customOptions);
-        };
-      }
+      init(customOptions);
     },
     setItem: function (key, value, callback) {
       if (!isApiReady()) {
