@@ -14,7 +14,7 @@ Cross Domain Local Storage
 
 ## Problem
 
-As for now, standard HTML5 Web Storage (A.K.A Local Storage) doesn't now allow cross domain data sharing.
+As for now, standard HTML5 Web Storage (a.k.a Local Storage) doesn't now allow cross domain data sharing.
 This may be a big problem in an organization which have a lot of sub domains and wants to share client data between them.
 
 ## Solution
@@ -75,19 +75,19 @@ bower install xdLocalStorage --save
 
 ```js
     // Store
-    xdLocalStorage.setItem(key, value, function (data) {//callback});
+    xdLocalStorage.setItem(key, value, function (data) { /* callback */ });
 
     // Retrieve
-    xdLocalStorage.getItem(key, function (data) {//callback });
+    xdLocalStorage.getItem(key, function (data) { /* callback */ });
 
     // Remove
-    xdLocalStorage.removeItem(key, function (data) {//callback });
+    xdLocalStorage.removeItem(key, function (data) { /* callback */ });
 
     // Key Name
-    xdLocalStorage.key(index, function (data) {//callback });
+    xdLocalStorage.key(index, function (data) { /* callback */ });
 
     // Clear All
-    xdLocalStorage.clear(function (data) {//callback });
+    xdLocalStorage.clear(function (data) { /* callback */ });
 ```
 
 ## Angular Support
@@ -115,7 +115,7 @@ angular.module('yourModule', ['xdLocalStorage']).config(function (xdLocalStorage
 
 ```js
 angular.module('yourModule').run(function(xdLocalStorage) {
-    xdLocalStorage.setItem(key, value, function (data) {//callback});
+    xdLocalStorage.setItem(key, value, function (data) { /* callback */});
 });
 
 ```
