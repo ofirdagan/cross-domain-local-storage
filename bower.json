@@ -1,6 +1,6 @@
 {
   "name": "xdLocalStorage",
-  "version": "1.0.12",
+  "version": "2.0.0",
   "homepage": "https://github.com/ofirdagan/cross-domain-local-storage",
   "authors": [
     "Ofir Dagan <ofirdagan@gmail.com>"
