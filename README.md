@@ -92,20 +92,20 @@ bower install xdLocalStorage --save
 
 ## Angular Support
 
+*UPDATE:*  Since version 2.0.0 the xdLocalStorage service supoprts promise interface hence no more annoying callbacks :)
+
 - import `ng-xdLocalStorage.min.js` instead of `xdLocalStorage.min.js`
 
-- include xdLocalStorage module and config it.
+- include xdLocalStorage module and call init in a run block.
 
 ```js
-angular.module('yourModule', ['xdLocalStorage']).config(function (xdLocalStorageProvider) {
-    xdLocalStorageProvider.init(
+angular.module('yourModule', ['xdLocalStorage']).run(function (xdLocalStorage) {
+    xdLocalStorage.init(
      {
         /* required */
-        iframeUrl:'path to your html from step 1',
-        //an option function to be called right after the iframe was loaded and ready for action
-        initCallback: function () {
-            console.log('Got iframe ready');
-        }
+        iframeUrl:'path to your html from step 1'
+    }).then(function () {
+        //an option function to be called once the iframe was loaded and ready for action    		console.log('Got iframe ready');
     });
 });
 
@@ -115,7 +115,9 @@ angular.module('yourModule', ['xdLocalStorage']).config(function (xdLocalStorage
 
 ```js
 angular.module('yourModule').run(function(xdLocalStorage) {
-    xdLocalStorage.setItem(key, value, function (data) { /* callback */});
+    xdLocalStorage.getItem(key).then(function (response) {
+    	console.log(response.value);
+    });
 });
 
 ```
