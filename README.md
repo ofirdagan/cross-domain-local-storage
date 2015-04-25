@@ -105,7 +105,8 @@ angular.module('yourModule', ['xdLocalStorage']).run(function (xdLocalStorage) {
         /* required */
         iframeUrl:'path to your html from step 1'
     }).then(function () {
-        //an option function to be called once the iframe was loaded and ready for action    		console.log('Got iframe ready');
+        //an option function to be called once the iframe was loaded and ready for action
+        console.log('Got iframe ready');
     });
 });
 
