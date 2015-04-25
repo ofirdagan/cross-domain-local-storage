@@ -7,22 +7,10 @@ describe('xdLocalStorage test', function () {
 
   var service;
 
-
-  afterEach(function () {
+  beforeEach(function () {
     xdLocalStorage.clear();
   });
 
-  it('should init the service successfully', function (done) {
-    xdLocalStorage.init(
-      {
-        iframeUrl: 'https://rawgit.com/ofirdagan/cross-domain-local-storage/master/app/views/cross-domain-local-storage.html',
-        initCallback: function () {
-          console.log('Got iframe ready');
-          done();
-        }
-      }
-    );
-  });
   it('should set value to local storage', function (done) {
     xdLocalStorage.setItem('itemKey', 'value', function (res) {
       expect(res.success).toBe(true);

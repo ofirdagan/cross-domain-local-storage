@@ -5,44 +5,62 @@
 /* global xdLocalStorage */
 
 angular.module('xdLocalStorage', [])
-  .provider('xdLocalStorage', function () {
-    var wasInit = false;
-    this.init = function (options) {
-      xdLocalStorage.init(options);
-      wasInit = true;
+  .service('xdLocalStorage', ['$q', '$rootScope', function ($q, $rootScope) {
+    var iframeReady = false;
+    var apiReady = $q.defer();
+
+    var unregister = $rootScope.$watch(function () {
+      return iframeReady;
+    }, function () {
+      apiReady.resolve(true);
+      unregister();
+    });
+
+    function waitForApi() {
+      if (!xdLocalStorage.wasInit()) {
+        throw 'You must init xdLocalStorage in app config before use';
+      }
+      return apiReady.promise;
+    }
+    function action(method) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      return waitForApi().then(function () {
+        var defer = $q.defer();
+        xdLocalStorage[method].apply(this, args.concat(function () {
+          var result = arguments[0];
+          $rootScope.$apply(function () {
+            defer.resolve(result);
+          });
+        }));
+        return defer.promise;
+      });
+    }
+    return {
+      init: function (options) {
+        var defer = $q.defer();
+        options.initCallback = function () {
+          $rootScope.$apply(function () {
+            iframeReady = true;
+            defer.resolve();
+          });
+        };
+        xdLocalStorage.init(options);
+        return defer.promise;
+      },
+      setItem: function (key, value) {
+        return action('setItem', key, value);
+      },
+      getItem: function (key) {
+        return action('getItem', key);
+      },
+      removeItem: function (key) {
+        return action('removeItem', key);
+      },
+      key: function (index) {
+        return action('key', index)
+      },
+      clear: function () {
+        return action('clear');
+      }
     };
-    this.$get = function () {
-      return {
-        setItem: function (key, value, callback) {
-          if (!wasInit) {
-            throw 'You must init xdLocalStorage in app config before use';
-          }
-          xdLocalStorage.setItem(key, value, callback);
-        },
-        getItem: function (key, callback) {
-          if (!wasInit) {
-            throw 'You must init xdLocalStorage in app config before use';
-          }
-          xdLocalStorage.getItem(key, callback);
-        },
-        removeItem: function (key, callback) {
-          if (!wasInit) {
-            throw 'You must init xdLocalStorage in app config before use';
-          }
-          xdLocalStorage.removeItem(key, callback);
-        },
-        key: function (index, callback) {
-          if (!wasInit) {
-            throw 'You must init xdLocalStorage in app config before use';
-          }
-          xdLocalStorage.key(index, callback);
-        },
-        clear: function (callback) {
-          if (!wasInit) {
-            throw 'You must init xdLocalStorage in app config before use';
-          }
-          xdLocalStorage.clear(callback);
-        }
-      };
-    };
-  });
+  }]);

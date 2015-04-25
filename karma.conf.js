@@ -17,9 +17,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'app/scripts/services/xd-utils.js',
-      'app/scripts/xdLocalStorage.js',
-      'test/**/*.js'
+      'bower_components/jquery/jquery.js',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      '{app,.tmp}/*.js',
+      '{app,.tmp}/scripts/*.js',
+      '{app,.tmp}/scripts/*/**/*.js',
+      'test/**/*.js',
+      '{app,.tmp}/views/**/*.html'
     ],
 
 
@@ -31,15 +36,15 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      '{.tmp,app}/scripts/{,!(lib)/**/}*.js': 'coverage'
-    },
+    //preprocessors: {
+    //  '{.tmp,app}/scripts/{,!(lib)/**/}*.js': 'coverage'
+    //},
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
 
     // web server port

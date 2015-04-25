@@ -53,11 +53,6 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     iframe.contentWindow.postMessage(JSON.stringify(data), '*');
   }
   function init(customOptions) {
-    if (wasInit) {
-      console.log('xdLocalStorage was already initialized!');
-      return;
-    }
-    wasInit = true;
     options = XdUtils.extend(customOptions, options);
     var temp = document.createElement('div');
 
@@ -90,6 +85,11 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       if (!customOptions.iframeUrl) {
         throw 'You must specify iframeUrl';
       }
+      if (wasInit) {
+        console.log('xdLocalStorage was already initialized!');
+        return;
+      }
+      wasInit = true;
       if (document.readyState === 'complete') {
         init(customOptions);
       } else {
@@ -128,6 +128,9 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
         return;
       }
       buildMessage('clear', null,  null, callback);
+    },
+    wasInit: function () {
+      return wasInit;
     }
   };
 })();
