@@ -45,6 +45,11 @@
     postData(id, {key: key});
   }
 
+  function getSize(id) {
+    var size = JSON.stringify(localStorage).length;
+    postData(id, {size: size});
+  }
+
   function clear(id) {
     localStorage.clear();
     postData(id, {});
@@ -66,6 +71,8 @@
         removeData(data.id, data.key);
       } else if (data.action === 'key') {
         getKey(data.id, data.key);
+      } else if (data.action === 'size') {
+        getSize(data.id);
       } else if (data.action === 'clear') {
         clear(data.id);
       }

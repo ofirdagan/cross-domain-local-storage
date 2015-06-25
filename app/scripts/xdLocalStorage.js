@@ -123,6 +123,12 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       }
       buildMessage('key', index,  null, callback);
     },
+    getSize: function(callback) {
+      if(!isApiReady()) {
+        return;
+      }
+      buildMessage('size', null, null, callback);
+    },
     clear: function (callback) {
       if (!isApiReady()) {
         return;
