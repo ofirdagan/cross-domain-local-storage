@@ -75,4 +75,13 @@ describe('xdLocalStorage test', function () {
       });
     });
   });
+
+  it('should return the size of local storage', function (done) {
+    xdLocalStorage.setItem('itemKey', 'value', function () {
+        xdLocalStorage.getSize(function (res) {
+            expect(res.size).toBe(5);
+            done();
+        });
+    });
+  });
 });
