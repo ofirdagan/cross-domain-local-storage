@@ -57,7 +57,7 @@ angular.module('xdLocalStorage', [])
         return action('removeItem', key);
       },
       key: function (index) {
-        return action('key', index)
+        return action('key', index);
       },
       clear: function () {
         return action('clear');
