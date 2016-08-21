@@ -77,11 +77,12 @@ describe('xdLocalStorage test', function () {
   });
 
   it('should return the size of local storage', function (done) {
+    var dummyLocalStorage = {itemKey: 'value'};
     xdLocalStorage.setItem('itemKey', 'value', function () {
-        xdLocalStorage.getSize(function (res) {
-            expect(res.size).toBe(5);
-            done();
-        });
+      xdLocalStorage.getSize(function (res) {
+        expect(res.size).toBe(JSON.stringify(dummyLocalStorage).length);
+        done();
+      });
     });
   });
 });
