@@ -50,6 +50,11 @@
     postData(id, {size: size});
   }
 
+  function getLength(id) {
+    var length = localStorage.length;
+    postData(id, {length: length});
+  }
+
   function clear(id) {
     localStorage.clear();
     postData(id, {});
@@ -62,6 +67,7 @@
     } catch (err) {
       //not our message, can ignore
     }
+
     if (data && data.namespace === MESSAGE_NAMESPACE) {
       if (data.action === 'set') {
         setData(data.id, data.key, data.value);
@@ -73,6 +79,8 @@
         getKey(data.id, data.key);
       } else if (data.action === 'size') {
         getSize(data.id);
+      } else if (data.action === 'length') {
+        getLength(data.id);
       } else if (data.action === 'clear') {
         clear(data.id);
       }

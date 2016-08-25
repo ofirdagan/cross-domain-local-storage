@@ -52,6 +52,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     };
     iframe.contentWindow.postMessage(JSON.stringify(data), '*');
   }
+
   function init(customOptions) {
     options = XdUtils.extend(customOptions, options);
     var temp = document.createElement('div');
@@ -128,6 +129,12 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
         return;
       }
       buildMessage('size', null, null, callback);
+    },
+    getLength: function(callback) {
+      if(!isApiReady()) {
+        return;
+      }
+      buildMessage('length', null, null, callback);
     },
     clear: function (callback) {
       if (!isApiReady()) {

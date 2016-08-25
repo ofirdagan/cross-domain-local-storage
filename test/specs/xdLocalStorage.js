@@ -85,4 +85,20 @@ describe('xdLocalStorage test', function () {
       });
     });
   });
+
+  it('should return the number of keys of local storage', function (done) {
+    xdLocalStorage.setItem('itemKey', 'value', function () {
+      xdLocalStorage.setItem('itemKey2', 'value2', function () {
+        xdLocalStorage.getLength(function (res) {
+          expect(res.length).toBe(2);
+          xdLocalStorage.removeItem('itemKey', function () {
+            xdLocalStorage.getLength(function (res) {
+              expect(res.length).toBe(1);
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
 });
