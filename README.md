@@ -10,6 +10,7 @@ Cross Domain Local Storage
 8. [Angular Support](#angular-support)
 9. [Demo](#demo)
 10. [Tests](#tests)
+11. [Limitations](#limitations)
 
 
 ## Problem
@@ -130,3 +131,9 @@ angular.module('yourModule').run(function(xdLocalStorage) {
 ## Tests
 
 I covered the basic API with tests [here](https://github.com/ofirdagan/cross-domain-local-storage/blob/master/test/specs/xdLocalStorage.js)
+
+## Limitations
+
+Apple has updated the defaults on Safari 7+ both on desktop and mobile to block 3rd party data. The option is now called "Block cookies and other website data" which refers to things like localstorage which are now completely isolated by domain.
+
+This implies that unfortunately this library will not be able to share cross domain information on Safari 7+. 
