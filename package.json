@@ -1,6 +1,7 @@
 {
-  "name": "test",
-  "version": "0.0.0",
+  "name": "xdlocalstorage",
+  "version": "2.0.3",
+  "main": "dist/scripts/xdLocalStorage.min.js",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
