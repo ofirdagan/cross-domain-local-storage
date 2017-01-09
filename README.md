@@ -29,9 +29,11 @@ They're also have a size limit (4K for all cookies together)
 
 ## Installation
 
-Download latest release from [here](https://github.com/ofirdagan/cross-domain-local-storage/releases) or use bower (recommended)
+Download latest release from [here](https://github.com/ofirdagan/cross-domain-local-storage/releases) or use bower/npm (recommended)
 ```sh
 bower install xdLocalStorage --save
+or
+npm install --save xdlocalstorage
 ```
 
 ## Usage
