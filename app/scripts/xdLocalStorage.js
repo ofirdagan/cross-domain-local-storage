@@ -94,9 +94,19 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       if (document.readyState === 'complete') {
         init(customOptions);
       } else {
-        window.onload = function () {
-          init(customOptions);
-        };
+        if (document.addEventListener) {
+          // All browsers expect IE<9
+          document.addEventListener('DOMContentLoaded', function () {
+            init(customOptions);
+          }, false);
+        } else {
+          // IE < 9
+          document.attachEvent('onreadystatechange', function () {
+            if (document.readyState === 'complete') {
+              init(customOptions);
+            }
+          });
+        }
       }
     },
     setItem: function (key, value, callback) {
