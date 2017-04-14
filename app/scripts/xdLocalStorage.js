@@ -80,6 +80,10 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
     return true;
   }
 
+  function isDomReady() {
+    return (document.readyState === 'complete');
+  }
+
   return {
     //callback is optional for cases you use the api before window load.
     init: function (customOptions) {
@@ -91,18 +95,20 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
         return;
       }
       wasInit = true;
-      if (document.readyState === 'complete') {
+      if (isDomReady()) {
         init(customOptions);
       } else {
         if (document.addEventListener) {
-          // All browsers expect IE<9
-          document.addEventListener('DOMContentLoaded', function () {
-            init(customOptions);
-          }, false);
+          // All browsers expect IE < 9
+          document.addEventListener('readystatechange', function () {
+            if (isDomReady()) {
+              init(customOptions);
+            }
+          });
         } else {
           // IE < 9
-          document.attachEvent('onreadystatechange', function () {
-            if (document.readyState === 'complete') {
+          document.attachEvent('readystatechange', function () {
+            if (isDomReady()) {
               init(customOptions);
             }
           });
