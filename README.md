@@ -95,7 +95,7 @@ npm install --save xdlocalstorage
 
 ## Angular Support
 
-*UPDATE:*  Since version 2.0.0 the xdLocalStorage service supoprts promise interface hence no more annoying callbacks :)
+*UPDATE:*  Since version 2.0.0 the xdLocalStorage service supports promise interface hence no more annoying callbacks :)
 
 - import `ng-xdLocalStorage.min.js` instead of `xdLocalStorage.min.js`
 
