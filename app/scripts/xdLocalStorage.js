@@ -63,7 +63,7 @@ window.xdLocalStorage = window.xdLocalStorage || (function () {
       window.attachEvent('onmessage', receiveMessage);
     }
 
-    temp.innerHTML = '<iframe id="' + options.iframeId + '" src=' + options.iframeUrl + ' style="display: none;"></iframe>';
+    temp.innerHTML = '<iframe id="' + options.iframeId + '" src="' + options.iframeUrl + '" style="display: none;"></iframe>';
     document.body.appendChild(temp);
     iframe = document.getElementById(options.iframeId);
   }
